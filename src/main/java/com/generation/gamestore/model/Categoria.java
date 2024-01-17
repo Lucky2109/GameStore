@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_categorias")
@@ -24,6 +25,7 @@ public class Categoria {
 	private Long id;
 
 	@NotNull(message = "O Atributo Descrição é genero")
+	@Size(min=5, max = 50, message = "O genero deve ter no minimo 5 e no maximo 50 caracteres ")
 	private String genero;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
@@ -53,5 +55,6 @@ public class Categoria {
 	public void setProdutos(List<Produtos> produtos) {
 		this.produtos = produtos;
 	}
+	
 
 }

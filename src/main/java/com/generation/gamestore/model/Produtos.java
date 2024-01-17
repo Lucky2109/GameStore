@@ -2,6 +2,7 @@ package com.generation.gamestore.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.generation.gamestore.repository.CategoriaRepository;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,7 +41,18 @@ public class Produtos {
 	@NotNull
 	public Double preco;
 	
+	@Size(min=1, max = 50, message = "A produtora deve ter no minimo 1 caracteres e no maximo 50! ")
+	@NotBlank
+	public String produtora;
 	
+	@Size(min=1, max = 50, message = "A distribuidora deve ter no minimo 1 caracteres e no maximo 50! ")
+	@NotBlank
+	public String distribuidora;
+	
+	@Size(min=10, max = 10, message = "A data deve ter no minimo 10 caracteres e no maximo 10! ")
+	@NotBlank
+	public String datalancamento;
+
 	public Long getId() {
 		return id;
 	}
@@ -63,6 +75,14 @@ public class Produtos {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	public Double getPreco() {
@@ -96,27 +116,12 @@ public class Produtos {
 	public void setDatalancamento(String datalancamento) {
 		this.datalancamento = datalancamento;
 	}
-
-	@Size(min=1, max = 50, message = "A produtora deve ter no minimo 1 caracteres e no maximo 50! ")
-	@NotBlank
-	public String produtora;
 	
-	@Size(min=1, max = 50, message = "A distribuidora deve ter no minimo 1 caracteres e no maximo 50! ")
-	@NotBlank
-	public String distribuidora;
 	
-	@Size(min=10, max = 10, message = "A data deve ter no minimo 10 caracteres e no maximo 10! ")
-	@NotBlank
-	public String datalancamento;
 
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
+	
+	
+	
 	
 }
 

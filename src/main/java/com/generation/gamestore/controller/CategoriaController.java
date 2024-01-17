@@ -25,17 +25,11 @@ import com.generation.gamestore.repository.CategoriaRepository;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/categoria")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoriaController {
 	
-	public CategoriaRepository getCategoriaRepository() {
-		return categoriaRepository;
-	}
-
-	public void setCategoriaRepository(CategoriaRepository categoriaRepository) {
-		this.categoriaRepository = categoriaRepository;
-	}
+	
 
 	@Autowired
     private CategoriaRepository categoriaRepository;
@@ -59,7 +53,8 @@ public class CategoriaController {
             .findAllByGeneroContainingIgnoreCase(genero));
     }
     
-    @PostMapping
+    
+   @PostMapping
     public ResponseEntity<Categoria> post(@Valid @RequestBody Categoria categoria){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(categoriaRepository.save(categoria));
@@ -76,12 +71,13 @@ public class CategoriaController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        Optional<Categoria> tema = categoriaRepository.findById(id);
+        Optional<Categoria> categoria = categoriaRepository.findById(id);
         
-        if(tema.isEmpty())
+        if(categoria.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         
         categoriaRepository.deleteById(id);              
     }
 
+    
 }
